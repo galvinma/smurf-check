@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+<ul>
+    {% for profile in profiles %}
+    <li>
+        <a href={{ "profile/target" |replace("target", profile.character_id) }}>
+            {{ profile["name"] }} / {{ profile["character_id"] }}
+        </a>
+
+    </li>
+    {% endfor %}
+</ul>
+
+{% endblock %}

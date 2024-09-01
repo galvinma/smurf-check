@@ -1,0 +1,102 @@
+{% extends 'base.html' %}
+
+
+{% macro sidebar_item(key, value) -%}
+<div class="sidebar-item">
+    <div class="sidebar-value">{{value}}</div>
+    <div class="sidebar-key">{{key}}</div>
+</div>
+
+{%- endmacro %}
+
+
+{% macro barometer_item(key, value) -%}
+<div class='barometer-item'>
+    <div class="barometer-value">{{value}}</div>
+    <div class="barometer-key">{{key}}</div>
+</div>
+
+{%- endmacro %}
+
+{% macro barometer_class(value) -%}
+
+{%- endmacro %}
+
+
+{% block content %}
+
+<div class="profile-wrapper">
+    <div class="profile-sidebar profile-left-sidebar">
+        <h2>{{profile.name}}</h2>
+        <h3>{{profile.stats.smurf_qual}} Smurf</h3>
+
+        {{ sidebar_item('Smurf Score', profile.stats.smurf_score) }}
+        {{ sidebar_item('Character Id', profile.character_id) }}
+        {{ sidebar_item('Race', profile.race) }}
+        {{ sidebar_item('Rating Max', profile.rating_max) }}
+        {{ sidebar_item('Current Rating', profile.rating_last) }}
+        {{ sidebar_item('Matches for Stats', profile.stats.match_count) }}
+        {{ sidebar_item('Win %', profile.stats.win_percent) }}
+        {{ sidebar_item('Wins', profile.stats.win_count) }}
+        {{ sidebar_item('Wins less than 60s', profile.stats.smurf_win_count) }}
+        {{ sidebar_item('Losses', profile.stats.loss_count) }}
+        {{ sidebar_item('Losses less than 60s', profile.stats.smurf_loss_count) }}
+
+
+    </div>
+    <div class="profile-content">
+        <img src={{ url_for('static', filename='mmr_plot/' + profile.character_id + ".png" ) }} />
+        <div class="profile-barometer-container">
+
+
+            <div class='barcode-item {{ mmr_delta_background_color(profile.stats.mmr_delta) }}'>
+                <div class="barometer-value">{{ profile.stats.mmr_delta}}</div>
+                <div class="barometer-key">MMR Delta</div>
+            </div>
+
+            <div class='barcode-item {{ smurf_result_ratio_background_color(profile.stats.smurf_win_loss_ratio) }}'>
+                <div class="barometer-value">{{ profile.stats.smurf_win_loss_ratio}}</div>
+                <div class="barometer-key">Smurf Game Result Ratio</div>
+            </div>
+
+            <div class='barcode-item {{ duration_ratio_background_color(profile.stats.avg_duration_ratio) }}'>
+                <div class="barometer-value">{{ profile.stats.avg_duration_ratio}}</div>
+                <div class="barometer-key">Duration Ratio</div>
+            </div>
+
+
+            <div class='barcode-item {{ smurf_loss_percent_background_color(profile.stats.smurf_loss_percent) }}'>
+                <div class="barometer-value">{{ profile.stats.smurf_loss_percent}}</div>
+                <div class="barometer-key">Smurf Losses (%)</div>
+            </div>
+
+
+            <div
+                class='barcode-item {{ same_race_loss_percent_background_color(profile.stats.same_race_loss_percent) }}'>
+                <div class="barometer-value">{{ profile.stats.same_race_loss_percent}}</div>
+                <div class="barometer-key">Same Race Loss (%)</div>
+            </div>
+
+        </div>
+
+    </div>
+    <div class="profile-sidebar profile-right-sidebar">
+        <h2>Notes</h2>
+        <form action="{{ url_for('profile', id=profile.character_id) }}" method="post">
+            <textarea name="player_notes" cols="40" rows="5"></textarea>
+            <input type="submit" value="Create Note" class="note-btn">
+        </form>
+
+        <div class="notes-wrapper">
+            {% for date, note in notes.items() %}
+            <div class="note-container">
+                <div class="note-content">{{note}}</div>
+                <div class="note-date">{{date}}</div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,108 @@
+body {
+    margin: 2rem;
+    font-family: "Roboto", sans-serif;
+}
+
+.gray-background {
+    background-color: #E0E0E0;
+}
+
+.red-background {
+    background-color: #FFCDD2;
+}
+
+.orange-background {
+    background-color: #FFCCBC;
+}
+
+.yellow-background {
+    background-color: #FFECB3;
+}
+
+.green-background {
+    background-color: #C8E6C9;
+}
+
+
+.profile-wrapper {
+    display: flex;
+    flex-direction: row;
+}
+
+.profile-sidebar{
+    padding-right: 1rem;
+    margin-right: 2rem;
+}
+
+
+.profile-left-sidebar{
+    margin-right: auto;
+    max-width: 20%;
+}
+
+
+.profile-right-sidebar{
+    margin-left: auto;
+    max-width: 20%;
+}
+
+.profile-content {
+    max-width: 60%;
+}
+
+
+.sidebar-item {
+    margin-bottom: 0.5rem;
+}
+
+.barometer-key {
+    font-size: 0.9rem;
+}
+
+.barometer-value {
+    font-size: 1.25rem;
+    font-weight: 500;
+}
+
+.sidebar-key {
+    font-size: 0.9rem;
+}
+
+.sidebar-value {
+    font-size: 1.15rem;
+    font-weight: 500;
+}
+
+.mmr-plot-title {
+    text-align: center;
+}
+
+.profile-barometer-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 1rem;
+}
+
+.barometer-item {
+    width: auto;
+}
+
+.note-btn {
+  min-width: 100%;
+  min-height: 40px;
+  margin: 1rem;
+  border-radius: 1px;
+  border: none;
+
+}
+
+.note-container {
+    margin-bottom: 1rem;
+}
+
+.note-date {
+    margin-top: 0.25rem;
+    font-size: 0.9rem;
+    font-weight: 300;
+}
